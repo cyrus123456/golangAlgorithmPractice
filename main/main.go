@@ -3,12 +3,19 @@ package main
 
 import (
 	practiceInterview "golangAlgorithmPractice/practiceInterview"
+	"log"
+	"sync"
 )
 
 func main() {
-	// 练习
-	practiceInterview.Test()
+	log.SetFlags(log.Lshortfile)
 
-	chanStop := make(chan bool)
-	chanStop <- true
+	waitGroup := sync.WaitGroup{}
+	waitGroup.Add(1)
+
+	// 练习
+	go practiceInterview.Test(&waitGroup)
+
+	waitGroup.Wait()
+
 }
