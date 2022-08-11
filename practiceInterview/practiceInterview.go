@@ -7,7 +7,12 @@ import (
 
 func Test(waitGroup *sync.WaitGroup) {
 	defer waitGroup.Done()
-	BPlusTreeFunc()
+
+	// 有向有权图最短路问题
+	// dijkstra()
+
+	// B+查找树
+	// BPlusTreeFunc()
 
 	// 希尔排序
 	// start := time.Now() // 获取当前时间
@@ -27,6 +32,21 @@ func Test(waitGroup *sync.WaitGroup) {
 	// start_2 := time.Now() // 获取当前时间
 	// pointerSplitMergeSort(tempSlice1, 0, len(tempSlice1))
 	// log.Println("堆排序优化后\r\n", time.Since(start_2))
+}
+
+/**
+ * @description: 有向有权图最短路问题
+ * @param {[][]int} graph 图抽象的邻接表(二维数组)
+ * @param {int} start 开始的点
+ * @param {int} end 结束的点
+ * @return {[]int} 最短路线
+ * @return {int} 最短路线距离
+ */
+func dijkstra(graph [][]int, start, end int) ([]int, int) {
+	// lenGraph := len(graph) //节点数量
+	// pre := make([]int, lenGraph) //记录前驱
+
+	return []int{}, -1
 }
 
 // 节点数据结构***************************************************************
