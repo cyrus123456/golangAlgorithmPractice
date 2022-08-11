@@ -43,8 +43,12 @@ func Test(waitGroup *sync.WaitGroup) {
  * @return {int} 最短路线距离
  */
 func dijkstra(graph [][]int, start, end int) ([]int, int) {
-	// lenGraph := len(graph) //节点数量
-	// pre := make([]int, lenGraph) //记录前驱
+	// lenGraph := len(graph)        //节点数量
+	// pre := make([]int, lenGraph)  //记录前驱
+	// vis := make([]int, lenGraph)  //记录节点遍历状态
+	// dis := make([]int, lenGraph)  //保存最短距离
+	// road := make([]int, lenGraph) //保存最短路径
+	// roads := []int{}
 
 	return []int{}, -1
 }
@@ -62,7 +66,7 @@ type BPlusNode struct {
 	Next   *BPlusNode   //叶子结点中指向下一个叶子结点，用于实现叶子结点链表
 }
 
-//B+树的定义
+// B+树的定义
 type BPlusTree struct {
 	mutex sync.RWMutex //多线程读写锁
 	root  *BPlusNode   //指向B+树的根结点
@@ -70,7 +74,7 @@ type BPlusTree struct {
 	halfw int          //B树至少有费根非叶 m(阶数)/2 棵子树
 }
 
-//B+树的初始化****************************************************************
+// B+树的初始化****************************************************************
 func NewLeafNode(width int) (BPlusNode *BPlusNode) {
 	BPlusNode.Items = make([]BPlusItem, width+1)
 	BPlusNode.Items = BPlusNode.Items[0:0]
