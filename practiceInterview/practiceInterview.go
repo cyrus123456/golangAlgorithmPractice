@@ -43,12 +43,29 @@ func Test(waitGroup *sync.WaitGroup) {
  * @return {int} 最短路线距离
  */
 func dijkstra(graph [][]int, start, end int) ([]int, int) {
-	// lenGraph := len(graph)        //节点数量
-	// pre := make([]int, lenGraph)  //记录前驱
-	// vis := make([]int, lenGraph)  //记录节点遍历状态
-	// dis := make([]int, lenGraph)  //保存最短距离
+	lenGraph := len(graph)       //节点数量
+	pre := make([]int, lenGraph) //记录前驱
+	// vis := make([]int, lenGraph) //记录节点遍历状态
+	dis := []int{} //保存最短距离
+	for i := 0; i < lenGraph; i++ {
+		dis = append(dis, i)
+	}
 	// road := make([]int, lenGraph) //保存最短路径
 	// roads := []int{}
+
+	//初始化起点到其他点的距离
+	for i := 0; i < lenGraph; i++ {
+		if i == start {
+			dis[i] = 0
+		} else {
+			dis[i] = graph[start][i]
+		}
+		if graph[start][i] != 999 {
+			pre[i] = start
+		} else {
+			pre[i] = -1
+		}
+	}
 
 	return []int{}, -1
 }
