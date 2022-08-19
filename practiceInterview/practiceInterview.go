@@ -3,6 +3,8 @@ package practiceinterview
 import (
 	"log"
 	"sync"
+
+	"github.com/duke-git/lancet/v2/slice"
 )
 
 func Test(waitGroup *sync.WaitGroup) {
@@ -62,7 +64,17 @@ func Dijkstra_Alg(graph [][]int, startNode int) {
 	// 记录已求出最短路径的顶点(以及相应的最短路径长度)
 	shortPaths := []int{}
 	shortPaths = append(shortPaths, startNode) //初始添加开始节点
+	// 调用地杰斯特拉
+	for {
+		min := 99999999
+		index := startNode
+		// 找出当前列最小加入到S, 要排除掉已经在S中的点
+		for i := 0; i < LenGraph; i++ {
+			if slice.IndexOf(shortPaths, i) == -1 && graph[i][startNode] < min {
 
+			}
+		}
+	}
 }
 
 /**
