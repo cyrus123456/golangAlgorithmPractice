@@ -45,6 +45,7 @@ func Test(waitGroup *sync.WaitGroup) {
  * @return {*}
  */
 func Dijkstra_Alg(graph [][]int, startNode int) {
+	maxPlus := 999999
 
 	LenGraph := len(graph)
 	// 节点输入错误
@@ -56,7 +57,7 @@ func Dijkstra_Alg(graph [][]int, startNode int) {
 	for i := 0; i < LenGraph; i++ {
 		for j := 0; j < LenGraph; j++ {
 			if graph[i][j] == -1 {
-				graph[i][j] = 99999999
+				graph[i][j] = maxPlus
 			}
 		}
 	}
@@ -66,13 +67,18 @@ func Dijkstra_Alg(graph [][]int, startNode int) {
 	shortPaths = append(shortPaths, startNode) //初始添加开始节点
 	// 调用地杰斯特拉
 	for {
-		min := 99999999
+		min := maxPlus
 		index := startNode
 		// 找出当前列最小加入到S, 要排除掉已经在S中的点
 		for i := 0; i < LenGraph; i++ {
 			if slice.IndexOf(shortPaths, i) == -1 && graph[i][startNode] < min {
-
+				min = graph[i][startNode] //每列最小值找到
+				index = i
 			}
+		}
+		// 填充之前判断下、防止无穷大
+		if min == maxPlus && index == startNode {
+			break
 		}
 	}
 }
