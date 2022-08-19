@@ -1,6 +1,7 @@
 package practiceinterview
 
 import (
+	"log"
 	"sync"
 )
 
@@ -35,7 +36,32 @@ func Test(waitGroup *sync.WaitGroup) {
 	// log.Println("堆排序优化后\r\n", time.Since(start_2))
 }
 
-func Dijkstra_Alg(graph [][]int, start int) {
+/**
+ * @description: Dijkstra最短路算法
+ * @param {[][]int} graph 邻接阵列
+ * @param {int} startNode 开始的节点
+ * @return {*}
+ */
+func Dijkstra_Alg(graph [][]int, startNode int) {
+
+	LenGraph := len(graph)
+	// 节点输入错误
+	if startNode < 0 || startNode >= len(graph) {
+		log.Panicln("节点输入错误")
+	}
+
+	// 替换一些原来数字
+	for i := 0; i < LenGraph; i++ {
+		for j := 0; j < LenGraph; j++ {
+			if graph[i][j] == -1 {
+				graph[i][j] = 99999999
+			}
+		}
+	}
+
+	// 记录已求出最短路径的顶点(以及相应的最短路径长度)
+	shortPaths := []int{}
+	shortPaths = append(shortPaths, startNode) //初始添加开始节点
 
 }
 
