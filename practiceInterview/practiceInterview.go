@@ -92,19 +92,44 @@ func Test(waitGroup *sync.WaitGroup) {
 func mostQueens_8x8() (result [8][8]string) {
 	isHaveRowQueens := map[int]bool{}
 	for i := range result {
-		for i1 := range result[i] {
-			// 获取第一个坐标放上攻击坐标
-			for i2_0 := range result[i] {
-				result[i][i2_0] = "1"
-			}
-			for i2_1 := range result[i] {
-				result[i][i2_1] = "1"
-			}
-			result[i][i1] = "Q" //放上皇后
-			isHaveRowQueens[i] = true
+		if !isHaveRowQueens[i] { //当前行没有皇后再填充
+			// for i1 := range result[i] {
+			// 	// 获取第一个坐标放上攻击坐标
+			// 	for i2_0 := range result[i] {
+			// 		result[i][i2_0] = "1"
+			// 	}
+			// 	for i2_1 := range result[i] {
+			// 		result[i][i2_1] = "1"
+			// 	}
+			// 	result[i][i1] = "Q" //放上皇后
+			// 	isHaveRowQueens[i] = true
+			// }
+			// 填充皇后以及攻击范围
+			fillingQueen(&result, isHaveRowQueens, i)
 		}
 	}
 	return
+}
+
+/**
+ * @description: 填充皇后以及攻击范围
+ * @param {*[8][8]string} result 棋盘
+ * @param {map[int]bool} isHaveRowQueens 标记每行是否有皇后
+ * @param {int} i 行下标
+ * @return {*}
+ */
+func fillingQueen(result *[8][8]string, isHaveRowQueens map[int]bool, i int) {
+	for i1 := range result[i] {
+		// 获取第一个坐标放上攻击坐标
+		for i2_0 := range result[i] {
+			result[i][i2_0] = "1"
+		}
+		for i2_1 := range result[i] {
+			result[i][i2_1] = "1"
+		}
+		result[i][i1] = "Q" //放上皇后
+		isHaveRowQueens[i] = true
+	}
 }
 
 // 每日温度(栈优化)
