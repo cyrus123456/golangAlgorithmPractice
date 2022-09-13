@@ -3,12 +3,62 @@ package practiceinterview
 import (
 	"log"
 	"sync"
-
-	"github.com/duke-git/lancet/v2/slice"
+	"time"
 )
+
+var num int = 0
 
 func Test(waitGroup *sync.WaitGroup) {
 	defer waitGroup.Done()
+
+	// N皇后
+	start := time.Now() // 获取当前时间
+	log.Println("N皇后 :", mostQueens_8x8())
+	log.Println("所用时间", time.Since(start), "执行次数", num)
+
+	// 每日温度
+	// start := time.Now() // 获取当前时间
+	// log.Println("每日温度 :", dailyTemperature([]int{
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// 	7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8,
+	// }))
+	// // log.Println("每日温度 :", dailyTemperature([]int{73, 74, 75, 71, 69, 72, 76, 73}))
+	// log.Println("所用时间", time.Since(start), "执行次数", num)
+
+	// 三数之和
+	// start := time.Now() // 获取当前时间
+	// log.Println("sumOfThreeNumbersIsZero([]int{-1, 0, 1, 2, -1, -4}) :", theBestTimeToBuyAndSellStocks([]int{7, 1, 5, 3, 6, 4, 8, 9, 2, 6, 3, 67, 4, 3, 2, 23, 5, 6, 7, 4, 7, 42, 7, 9, 6, 3, 12, 5, 8}))
+	// log.Println("所用时间", time.Since(start))
+
+	// //三数之和
+	// start := time.Now() // 获取当前时间
+	// log.Println("sumOfThreeNumbersIsZero([]int{-1, 0, 1, 2, -1, -4}) :", sumOfThreeNumbersIsZero([]int{-1, 0, 1, 2, -1, -4, -2, 2, -5, 2, 3}))
+	// log.Println("所用时间", time.Since(start))
+
+	// 被包问题动态规划
+	// dynamicProgramming()
 
 	// 有向有权图最短路问题
 	// Dijkstra_Alg()
@@ -38,50 +88,198 @@ func Test(waitGroup *sync.WaitGroup) {
 	// log.Println("堆排序优化后\r\n", time.Since(start_2))
 }
 
+// N皇后
+func mostQueens_8x8() (result [8][8]string) {
+	isHaveRowQueens := map[int]bool{}
+	for i := range result {
+		for i1 := range result[i] {
+			// 获取第一个坐标放上攻击坐标
+			for i2_0 := range result[i] {
+				result[i][i2_0] = "1"
+			}
+			for i2_1 := range result[i] {
+				result[i][i2_1] = "1"
+			}
+			result[i][i1] = "Q" //放上皇后
+			isHaveRowQueens[i] = true
+		}
+	}
+	return
+}
+
+// 每日温度(栈优化)
+// func dailyTemperature(dp []int) (result []int) {
+// 	lenDp := len(dp)
+// 	result = make([]int, lenDp)
+// 	indexStack := []int{}
+// 	for i := 0; i < lenDp; i++ {
+// 		for len(indexStack) > 0 && dp[i] >= dp[indexStack[len(indexStack)-1]] {
+// 			num++
+// 			// result = append(result, i-indexStack[len(indexStack)-1])
+// 			result[indexStack[len(indexStack)-1]] = i - indexStack[len(indexStack)-1]
+// 			indexStack = indexStack[:len(indexStack)-1]
+// 		}
+// 		indexStack = append(indexStack, i)
+// 	}
+// 	return
+// }
+
+// // 每日温度
+// func dailyTemperature(dp []int) (result []int) {
+// 	lenDp := len(dp)
+// 	result = make([]int, lenDp)
+// 	for i := 0; i < lenDp; i++ {
+// 		for j := i + 1; j < lenDp; j++ {
+// 			num++
+// 			if dp[j] >= dp[i] && result[i] == 0 {
+// 				result[i] = j - i
+// 			} else {
+// 				continue
+// 			}
+// 		}
+// 	}
+// 	return
+// }
+
+// // 买卖股票的最佳时机（动态规划）
+// func theBestTimeToBuyAndSellStocks(participants []int) (result int) {
+
+// 	return
+// }
+
+//三数之和
+// func sumOfThreeNumbersIsZero(sliceInt []int) (result [][]int) {
+// 	// 数组总长度不够
+// 	sliceIntLEN := len(sliceInt)
+// 	if sliceIntLEN <= 2 {
+// 		return
+// 	}
+// 	sort.Ints(sliceInt)
+// 	log.Printf("sliceInt排序结果: %v\n", sliceInt)
+// 	for i := 0; i < sliceIntLEN-3; i++ {
+// 		// 当前值大于0或者等于上一次的重复值跳过
+// 		if sliceInt[i] > 0 || (i > 0 && sliceInt[i] == sliceInt[i-1]) { //注意下标越界
+// 			continue
+// 		}
+// 		l := i + 1
+// 		r := sliceIntLEN - 1
+// 		for l < r {
+// 			sum := sliceInt[i] + sliceInt[l] + sliceInt[r]
+// 			if sum == 0 {
+// 				result = append(result, []int{sliceInt[i], sliceInt[l], sliceInt[r]})
+// 				for l < r && sliceInt[l] == sliceInt[l-1] {
+// 					l++
+// 				}
+// 				for l < r && r < sliceIntLEN-1 && sliceInt[r] == sliceInt[r+1] { //注意下标越界
+// 					r--
+// 				}
+// 				l++
+// 				r--
+// 			} else if sum > 0 {
+// 				r--
+// 			} else {
+// 				l++
+// 			}
+// 		}
+// 	}
+// 	return
+// }
+
+// type minPathSumSTRUCT struct{}
+
+// func (_minPathSumSTRUCT *minPathSumSTRUCT) minPathSum(grid [][]int) []int {
+
+// 	lenGrid := len(grid)     // 矩阵高度
+// 	lenGrid0 := len(grid[0]) // 矩阵宽度
+// 	dp := make([]int, lenGrid0)
+
+// 	for i := lenGrid; i >= 0; i-- { //逆向循环矩阵高度
+// 		for j := lenGrid0; j >= 0; j-- { //逆向循环矩阵宽度
+
+// 			if i == lenGrid-1 && j != lenGrid0-1 { //最后一行处理
+// 				dp[j] = grid[i][j] + dp[j+1]
+// 			} else if j == lenGrid0-1 && i != lenGrid-1 { //最后一列处理
+// 				dp[j] = grid[i][j] + dp[j]
+// 			} else if j != lenGrid0-1 && i != lenGrid-1 {
+// 				dp[j] = grid[i][j] + int(math.Min(float64(dp[j]), float64(dp[j+1])))
+// 			}
+
+// 		}
+// 	}
+// 	return []int{}
+// }
+
+// func dynamicProgramming() {
+
+// 	minPathSumSTRUCT := minPathSumSTRUCT{}
+
+// 	log.Println(" :", minPathSumSTRUCT.minPathSum([][]int{
+// 		{1, 2, 3},
+// 		{4, 5, 3},
+// 		{8, 7, 5},
+// 	}))
+
+// }
+
 /**
  * @description: Dijkstra最短路算法
  * @param {[][]int} graph 邻接阵列
  * @param {int} startNode 开始的节点
  * @return {*}
  */
-func Dijkstra_Alg(graph [][]int, startNode int) {
-	maxPlus := 999999
+// func Dijkstra_Alg(graph [][]int, startNode int) {
+// 	maxPlus := 999999
 
-	LenGraph := len(graph)
-	// 节点输入错误
-	if startNode < 0 || startNode >= len(graph) {
-		log.Panicln("节点输入错误")
-	}
+// 	LenGraph := len(graph)
+// 	// 节点输入错误
+// 	if startNode < 0 || startNode >= len(graph) {
+// 		log.Panicln("节点输入错误")
+// 	}
 
-	// 替换一些原来数字
-	for i := 0; i < LenGraph; i++ {
-		for j := 0; j < LenGraph; j++ {
-			if graph[i][j] == -1 {
-				graph[i][j] = maxPlus
-			}
-		}
-	}
+// 	// 替换一些原来数字
+// 	for i := 0; i < LenGraph; i++ {
+// 		for j := 0; j < LenGraph; j++ {
+// 			if graph[i][j] == -1 {
+// 				graph[i][j] = maxPlus
+// 			}
+// 		}
+// 	}
 
-	// 记录已求出最短路径的顶点(以及相应的最短路径长度)
-	shortPaths := []int{}
-	shortPaths = append(shortPaths, startNode) //初始添加开始节点
-	// 调用地杰斯特拉
-	for {
-		min := maxPlus
-		index := startNode
-		// 找出当前列最小加入到S, 要排除掉已经在S中的点
-		for i := 0; i < LenGraph; i++ {
-			if slice.IndexOf(shortPaths, i) == -1 && graph[i][startNode] < min {
-				min = graph[i][startNode] //每列最小值找到
-				index = i
-			}
-		}
-		// 填充之前判断下、防止无穷大
-		if min == maxPlus && index == startNode {
-			break
-		}
-	}
-}
+// 	// 记录已求出最短路径的顶点(以及相应的最短路径长度)
+// 	shortPaths := []int{}
+// 	shortPaths = append(shortPaths, startNode) //初始添加开始节点
+// 	// 调用地杰斯特拉
+// 	for {
+// 		min := maxPlus
+// 		index := startNode
+// 		// 找出当前列最小加入到S, 要排除掉已经在S中的点
+// 		for i := 0; i < LenGraph; i++ {
+// 			if slice.IndexOf(shortPaths, i) == -1 && graph[i][startNode] < min {
+// 				min = graph[i][startNode] //每列最小值找到
+// 				index = i
+// 			}
+// 		}
+// 		// 填充之前判断下、防止无穷大
+// 		if min == maxPlus && index == startNode {
+// 			break
+// 		}
+// 		log.Printf("最小值min=%d, 加入节点%d \n", min, index)
+// 		shortPaths = append(shortPaths, index) //加入目前最小的到S中
+
+// 		// 根据先加入的这个点,更新其他点的权重
+// 		for i := 0; i < LenGraph; i++ {
+// 			if slice.IndexOf(shortPaths, i) == -1 && graph[i][index]+min < graph[i][startNode] {
+// 				graph[i][startNode] = graph[i][index]
+// 			}
+// 		}
+// 		log.Panicln("集合", shortPaths)
+
+// 		//2.3 检测下S是否满了，满了就退出，不满就重复前两步
+// 		if len(shortPaths) >= LenGraph {
+// 			break
+// 		}
+// 	}
+// }
 
 /**
  * @description: 有向有权图最短路问题
