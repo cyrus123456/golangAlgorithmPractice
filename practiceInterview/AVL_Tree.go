@@ -39,10 +39,10 @@ func (_avlTree *avlTree[K, V]) getBalanceFactor(node *node_avlTree[K, V]) int {
  */
 func (avlTree *avlTree[K, V]) rightRotate(node *node_avlTree[K, V]) *node_avlTree[K, V] {
 	tempLeft := node.left
-	tempLeftLeft := tempLeft.left
+	tempLeftRight := tempLeft.right
 	// 右旋转
 	tempLeft.right = node
-	node.left = tempLeftLeft
+	node.left = tempLeftRight
 	// 更换新高度
 	node.height = int(math.Max(float64(node.left.height), float64(node.right.height))) + 1
 	tempLeft.height = int(math.Max(float64(tempLeft.left.height), float64(tempLeft.right.height))) + 1
@@ -105,12 +105,12 @@ func (_avlTree *avlTree[K, V]) add_node_avlTree(node *node_avlTree[K, V], key K,
 
 		// 当前和左子节点都向左倾斜-又旋转
 		if balanceFactor > 1 && _avlTree.getBalanceFactor(node.left) >= 0 {
-
+			return _avlTree.rightRotate(node)
 		}
 
 		// 当前和右子节点都向右勤快些-向左转
 		if balanceFactor < -1 && _avlTree.getBalanceFactor(node.right) <= 0 {
-
+			return _avlTree.leftRoutate(node)
 		}
 
 		// 当前节点左偏，子节点右偏
