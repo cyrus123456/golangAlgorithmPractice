@@ -118,15 +118,19 @@ func Test(waitGroup *sync.WaitGroup) {
  */
 // func fillingQueen(result *[8][8]string, isHaveRowQueens map[int]bool, i int) {
 // 	for i1 := range result[i] {
-// 		// 获取第一个坐标放上攻击坐标
-// 		for i2_0 := range result[i] {
-// 			result[i][i2_0] = "1"
+// 		if result[i][i1] == "" {
+// 			// 获取第一个坐标放上攻击坐标
+// 			for i2_0 := range result[i] {
+// 				result[i][i2_0] = "1"
+// 				result[i+1][i2_0] = "1"
+// 			}
+// 			for i2_1 := range result[i] {
+// 				result[i][i2_1] = "1"
+// 				result[len(result)-1-i][i2_1] = "1"
+// 			}
+// 			result[i][i1] = "Q" //放上皇后
+// 			isHaveRowQueens[i] = true
 // 		}
-// 		for i2_1 := range result[i] {
-// 			result[i][i2_1] = "1"
-// 		}
-// 		result[i][i1] = "Q" //放上皇后
-// 		isHaveRowQueens[i] = true
 // 	}
 // }
 
