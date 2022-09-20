@@ -1,20 +1,18 @@
 package practiceinterview
 
 import (
-	"log"
 	"sync"
-	"time"
 )
 
-var num int = 0
+// var num int = 0
 
 func Test(waitGroup *sync.WaitGroup) {
 	defer waitGroup.Done()
 
 	// N皇后
-	start := time.Now() // 获取当前时间
-	log.Println("N皇后 :", mostQueens_8x8())
-	log.Println("所用时间", time.Since(start), "执行次数", num)
+	// start := time.Now() // 获取当前时间
+	// log.Println("N皇后 :", mostQueens_8x8())
+	// log.Println("所用时间", time.Since(start), "执行次数", num)
 
 	// 每日温度
 	// start := time.Now() // 获取当前时间
@@ -89,27 +87,27 @@ func Test(waitGroup *sync.WaitGroup) {
 }
 
 // N皇后
-func mostQueens_8x8() (result [8][8]string) {
-	isHaveRowQueens := map[int]bool{}
-	for i := range result {
-		if !isHaveRowQueens[i] { //当前行没有皇后再填充
-			// for i1 := range result[i] {
-			// 	// 获取第一个坐标放上攻击坐标
-			// 	for i2_0 := range result[i] {
-			// 		result[i][i2_0] = "1"
-			// 	}
-			// 	for i2_1 := range result[i] {
-			// 		result[i][i2_1] = "1"
-			// 	}
-			// 	result[i][i1] = "Q" //放上皇后
-			// 	isHaveRowQueens[i] = true
-			// }
-			// 填充皇后以及攻击范围
-			fillingQueen(&result, isHaveRowQueens, i)
-		}
-	}
-	return
-}
+// func mostQueens_8x8() (result [8][8]string) {
+// 	isHaveRowQueens := map[int]bool{}
+// 	for i := range result {
+// 		if !isHaveRowQueens[i] { //当前行没有皇后再填充
+// 			// for i1 := range result[i] {
+// 			// 	// 获取第一个坐标放上攻击坐标
+// 			// 	for i2_0 := range result[i] {
+// 			// 		result[i][i2_0] = "1"
+// 			// 	}
+// 			// 	for i2_1 := range result[i] {
+// 			// 		result[i][i2_1] = "1"
+// 			// 	}
+// 			// 	result[i][i1] = "Q" //放上皇后
+// 			// 	isHaveRowQueens[i] = true
+// 			// }
+// 			// 填充皇后以及攻击范围
+// 			fillingQueen(&result, isHaveRowQueens, i)
+// 		}
+// 	}
+// 	return
+// }
 
 /**
  * @description: 填充皇后以及攻击范围
@@ -118,19 +116,19 @@ func mostQueens_8x8() (result [8][8]string) {
  * @param {int} i 行下标
  * @return {*}
  */
-func fillingQueen(result *[8][8]string, isHaveRowQueens map[int]bool, i int) {
-	for i1 := range result[i] {
-		// 获取第一个坐标放上攻击坐标
-		for i2_0 := range result[i] {
-			result[i][i2_0] = "1"
-		}
-		for i2_1 := range result[i] {
-			result[i][i2_1] = "1"
-		}
-		result[i][i1] = "Q" //放上皇后
-		isHaveRowQueens[i] = true
-	}
-}
+// func fillingQueen(result *[8][8]string, isHaveRowQueens map[int]bool, i int) {
+// 	for i1 := range result[i] {
+// 		// 获取第一个坐标放上攻击坐标
+// 		for i2_0 := range result[i] {
+// 			result[i][i2_0] = "1"
+// 		}
+// 		for i2_1 := range result[i] {
+// 			result[i][i2_1] = "1"
+// 		}
+// 		result[i][i1] = "Q" //放上皇后
+// 		isHaveRowQueens[i] = true
+// 	}
+// }
 
 // 每日温度(栈优化)
 // func dailyTemperature(dp []int) (result []int) {
