@@ -1,6 +1,8 @@
 package practiceinterview
 
-import "math"
+import (
+	"math"
+)
 
 // Ordered 限制所有支持比较运算符的类型。
 // 也就是说符合条件的类型都支持 <, <=, >, 和 >= 运算符。
@@ -115,15 +117,55 @@ func (_avlTree *avlTree[K, V]) add_node_avlTree(node *node_avlTree[K, V], key K,
 
 		// 当前节点左偏，子节点右偏
 		if balanceFactor > 1 && _avlTree.getBalanceFactor(node.left) < 0 {
-
+			node.right = _avlTree.leftRoutate(node.right)
+			return _avlTree.rightRotate(node)
 		}
 
 		// 当前节点右偏，子节点左偏
 		if balanceFactor < -1 && _avlTree.getBalanceFactor(node.right) > 0 {
-
+			node.left = _avlTree.rightRotate(node.left)
+			return _avlTree.leftRoutate(node)
 		}
 
 	}
+
+	return node
+}
+
+/**
+ * @description: 获取值
+ * @param {*node_avlTree[K} node 节点
+ * @param {K} key 主键
+ * @return {*node_avlTree[K, V]} 节点
+ */
+func (_avlTree *avlTree[K, V]) getNode(node *node_avlTree[K, V], key K) *node_avlTree[K, V] {
+
+	if key == node.key { //找到了
+		return node
+	} else if key < node.key { //值比当前节点小
+		return _avlTree.getNode(node.left, key)
+	} else { //值比当前节点大
+		return _avlTree.getNode(node.right, key)
+	}
+}
+
+/**
+ * @description: 删除
+ * @param {K} key 要删除的主键
+ * @return {interface{}} 返回任意数据类型
+ */
+func (_avlTree *avlTree[K, V]) remove_avlTree(key K) interface{} {
+	_avlTree.root = _avlTree.remove_node_avlTree(_avlTree.root, key)
+	return nil
+}
+
+/**
+ * @description: 删除递归
+ * @param {*node_avlTree[K} node 节点
+ * @param {K} key 要删除的
+ * @return {*node_avlTree[K, V]} 节点
+ */
+func (_avlTree *avlTree[K, V]) remove_node_avlTree(node *node_avlTree[K, V], key K) *node_avlTree[K, V] {
 
 	return node
 }
